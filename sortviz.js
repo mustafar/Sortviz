@@ -35,7 +35,7 @@ window.mrzv.sortviz = {
         return trace;
     },
     
-    registerTrace : function (name, trace) {
+    registerTrace : function (name, trace, tick) {
         var fullTrace = trace;
         var maxSteps = 0;
         var i,j;
@@ -44,6 +44,7 @@ window.mrzv.sortviz = {
                 maxSteps = fullTrace[this.numbers[i]].length;
             }
         }
+        maxSteps = tick > maxSteps ? tick : maxSteps;
         for (i=0; i<this.numbers.length; i++) {
             for (j=0; j<maxSteps; j++) {
                 if (fullTrace[this.numbers[i]][j] === undefined) {
@@ -84,7 +85,7 @@ window.mrzv.sortviz = {
                 }
             }
         }
-        this.registerTrace("Bubble Sort", trace);
+        this.registerTrace("Bubble Sort", trace, tick);
         return numbers;
     },
     
@@ -102,7 +103,7 @@ window.mrzv.sortviz = {
             }
             this.swap(numbers, minPos, i, tick, trace);
         }
-        this.registerTrace("Selection Sort", trace);
+        this.registerTrace("Selection Sort", trace, tick);
         return numbers;
     },
     
@@ -123,7 +124,7 @@ window.mrzv.sortviz = {
             }
             this.move(numbers, toInsert, j, tick, trace);
         }
-        this.registerTrace("Insertion Sort", trace);
+        this.registerTrace("Insertion Sort", trace, tick);
         return numbers;
     },
     
@@ -132,7 +133,7 @@ window.mrzv.sortviz = {
         var trace = this.initTrace(numbers);
         mergeSortTick = 0;
         this.mergeSortPass(numbers, trace, 0, numbers.length-1);
-        this.registerTrace("Merge Sort", trace);
+        this.registerTrace("Merge Sort", trace, mergeSortTick);
         return numbers;
     },
     
@@ -165,48 +166,6 @@ window.mrzv.sortviz = {
                 mid++;
                 right++;
             }
-        }
-    },
-    
-    // TODO: remove - this is not in place
-    mergeSortMergeOld : function (numbers, trace, start, mid, stop) {
-        var leftArr = numbers.slice(start, mid+1);
-        var rightArr = numbers.slice(mid+1, stop+1);
-        var leftCandidate, rightCandidate, winner;
-        for (var i=start; i<=stop; i++) {
-            if (leftArr.length > 0) {
-                leftCandidate = leftArr.shift();
-            }
-            if (rightArr.length > 0) {
-                rightCandidate = rightArr.shift();
-            }
-            
-            mergeSortTick = mergeSortTick + 1;
-            if (leftCandidate === undefined) {
-                winner = rightCandidate;
-            } else if (rightCandidate === undefined) {
-                winner = leftCandidate;
-            } else {
-                if (leftCandidate < rightCandidate) {
-                    winner = leftCandidate;
-                } else {
-                    winner = rightCandidate;
-                }
-            }
-            
-            this.move(numbers, winner, i, mergeSortTick, trace);
-            
-            if (winner === leftCandidate) {
-                if (rightCandidate !== undefined) {
-                    rightArr.unshift(rightCandidate);
-                }
-            } else {
-                if (leftCandidate !== undefined) {
-                    leftArr.unshift(leftCandidate);
-                }
-            }
-            leftCandidate = undefined;
-            rightCandidate = undefined;
         }
     },
     
