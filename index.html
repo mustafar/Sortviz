@@ -35,7 +35,7 @@
 
 <script type="text/javascript">
 
-  var errMsg = 'Please enter 3 to 10 numbers.';
+  var errMsg = 'Please enter 3 to 10 numbers. No duplicates.';
   var numbersInput = document.getElementById('numbers');
   var messageBox = document.getElementById('message');
   
@@ -44,10 +44,16 @@
     var numbers = [];
     for (var i in numbersTxt) {
 			var numTxt = numbersTxt[i].trim();
-			if (numTxt.length === 0 || isNaN(Number(numTxt))) {
+			var num = Number(numTxt);
+			if (numTxt.length === 0 || isNaN(num)) {
 				return [];
 			}
-      numbers.push(Number(numTxt));
+			for (var j=0; j<numbers.length; j++) {
+				if (numbers[j] === num) {
+					return [];
+				}
+			}
+      numbers.push(num);
     }
     
     return (numbers.length < 3 || numbers.length > 10)? [] : numbers;
