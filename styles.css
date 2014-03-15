@@ -1,0 +1,35 @@
+body {
+  width: 900px;
+  margin: 20px auto; /* center */
+  padding: 20px;
+  background: #eee;
+}
+
+#form {
+  width: 300px;
+  margin: auto auto 50px auto;
+  font-family: "Helvetica Neue","HelveticaNeue",Helvetica,Arial,sans-serif;
+}
+
+#numbers {
+  width: 100%;
+  padding: 11px 10px 11px 13px;
+  display: block;
+  margin: auto;
+  border: 0;
+  font: 16px/1.4 "Helvetica Neue","HelveticaNeue",Helvetica,Arial,sans-serif;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+#message {
+  margin-top: 5px;
+  padding-left: 7px;
+  color: #D8000C;
+}
+
+.sortviz-container {
+  height: 600px;
+  width: 900px;
+}

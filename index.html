@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Sortviz</title>
+  <script src="./sortviz.js"></script>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+
+  <div id="form">
+    <input id='numbers' type='text' value='1, 9, 2, 6, 4, 8, 3, 0, 7' />
+    <div id='message'></div>
+  </div>
+  <div id='container' class='sortviz-container'></div>
+
+<script type="text/javascript">
+
+  var errMsg = 'Please enter 3 to 10 numbers.';
+  var numbersInput = document.getElementById('numbers');
+  var messageBox = document.getElementById('message');
+  
+  function getNumbers() {
+    var numbersTxt = numbersInput.value.split(',');
+    var numbers = [];
+    for (var i in numbersTxt) {
+      var num = Number(numbersTxt[i]);
+      console.log(num);
+      if (isNaN(num)) {
+        return [];
+      }
+      numbers.push(num);
+    }
+    
+    return (numbers.length < 3 || numbers.length > 10)? [] : numbers;
+  }
+  
+  function visualize() {
+    var numbers = getNumbers();
+    if (numbers.length > 0) {
+      messageBox.innerHTML = '';
+      mrzv.sortviz.init(numbers);
+      mrzv.sortviz.wipe("container");
+      mrzv.sortviz.draw("container");
+    } else {
+      messageBox.innerHTML = errMsg;
+    }
+  }
+  
+  numbersInput.addEventListener('keypress', function (e) {
+      var key = e.which || e.keyCode;
+      if (key == 13) { // 13 is enter
+        visualize();
+      }
+  });
+
+  document.addEventListener("DOMContentLoaded", function() {
+    visualize();
+  });
+  
+</script>
+
+</body>
+</html>
