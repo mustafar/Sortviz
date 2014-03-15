@@ -1,21 +1,37 @@
 body {
   width: 900px;
-  margin: 20px auto; /* center */
+  margin: 10px auto; /* center */
   padding: 20px;
   background: #eee;
 }
 
+#top {
+  height: 110px;
+}
+
+#header {
+  float: left;
+  margin-left: 50px;
+  color: #aaa;
+}
+
+#header .title {
+  font-family: "Helvetica Neue","HelveticaNeue",Helvetica,Arial,sans-serif;
+  font-size: 45px;
+}
+
 #form {
-  width: 300px;
-  margin: auto auto 50px auto;
+  float: right;
+  margin-right: 50px;
+  width: 350px;
   font-family: "Helvetica Neue","HelveticaNeue",Helvetica,Arial,sans-serif;
 }
 
 #numbers {
+  color: #aaa;
   width: 100%;
   padding: 11px 10px 11px 13px;
   display: block;
-  margin: auto;
   border: 0;
   font: 16px/1.4 "Helvetica Neue","HelveticaNeue",Helvetica,Arial,sans-serif;
   -webkit-box-sizing: border-box;
@@ -26,10 +42,27 @@ body {
 #message {
   margin-top: 5px;
   padding-left: 7px;
-  color: #D8000C;
+  color: #000;
 }
 
 .sortviz-container {
+  clear: both;
   height: 600px;
   width: 900px;
+}
+
+#footer {
+  float: right;
+  margin: 10px 50px 10px 0;
+  color: #aaa;
+}
+
+#footer .brand a{
+  text-decoration: none;
+  color: inherit;
+}
+
+#footer .brand a:hover{
+  text-decoration: underline;
+  color: #000;
 }
