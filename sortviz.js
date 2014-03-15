@@ -149,6 +149,7 @@ window.mrzv.sortviz = {
     mergeSortMerge : function (numbers, trace, start, mid, stop) {
         var left = start;
         var right = mid + 1;
+        mergeSortTick = mergeSortTick + 1;
         if (numbers[mid] <= numbers[right]) {
             return;
         }
