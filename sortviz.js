@@ -4,8 +4,8 @@ window.mrzv.sortviz = {
 
     numbers : null,
     numbersSorted : null,
-    lineWeights : null,
     traces : null,
+    strokeStyle : "#000",
 
     init : function(numbers){
         this.numbers = numbers;
@@ -23,19 +23,6 @@ window.mrzv.sortviz = {
             if (this.numbersSorted === null) {
                 this.numbersSorted = numbers;
             }
-        }
-        this.setLineWeights();
-    },
-    
-    setLineWeights : function() {
-        scaleMin = 0;
-        scaleMax = 256;
-        this.lineWeights = {};
-        for (var i=0; i<this.numbersSorted.length; i++) {
-            var scale = Math.ceil(
-              scaleMax - (i * (scaleMax - scaleMin) /
-                this.numbersSorted.length));
-            this.lineWeights[this.numbersSorted[i]] = scale;
         }
     },
     
@@ -240,7 +227,6 @@ window.mrzv.sortviz = {
         
         for (var i=0; i<numLines; i++) {
             var number = this.numbers[i];
-            var lineColorScale = this.lineWeights[number];
             var data = trace[number];
             var xPrev = null, yPrev = null;
             for (var tick=0; tick<data.length; tick++) {
@@ -252,7 +238,7 @@ window.mrzv.sortviz = {
                 }
                 
                 // plot
-                context.strokeStyle = 'rgb(' + '0,' + lineColorScale + ',0)';
+                context.strokeStyle = this.strokeStyle;
                 context.lineWidth = 3;
                 context.moveTo(xPrev, yPrev);
                 context.bezierCurveTo((xPrev + x)/2, yPrev, (xPrev + x)/2,
@@ -280,7 +266,10 @@ window.mrzv.sortviz = {
       container.innerHTML = '';
     },
     
-    draw : function (containerName) {
+    draw : function (containerName, strokeColor) {
+        if (strokeColor) {
+            this.strokeStyle = strokeColor;
+        }
         var container = document.getElementById(containerName);
         var height = container.offsetHeight;
         var width = container.offsetWidth;
