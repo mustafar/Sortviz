@@ -43,12 +43,11 @@
     var numbersTxt = numbersInput.value.split(',');
     var numbers = [];
     for (var i in numbersTxt) {
-      var num = Number(numbersTxt[i]);
-      console.log(num);
-      if (isNaN(num)) {
-        return [];
-      }
-      numbers.push(num);
+			var numTxt = numbersTxt[i].trim();
+			if (numTxt.length === 0 || isNaN(Number(numTxt))) {
+				return [];
+			}
+      numbers.push(Number(numTxt));
     }
     
     return (numbers.length < 3 || numbers.length > 10)? [] : numbers;
