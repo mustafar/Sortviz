@@ -131,43 +131,44 @@ window.mrzv.sortviz = {
   mergeSort: function () {
     var numbers = this.numbers.slice(0);
     var trace = this.initTrace(numbers);
-    mergeSortTick = 0;
-    this.mergeSortPass(numbers, trace, 0, numbers.length - 1);
-    this.registerTrace("Merge Sort", trace, mergeSortTick);
+    var tick = this.mergeSortPass(numbers, trace, 0, 0, numbers.length - 1);
+    this.registerTrace("Merge Sort", trace, tick);
     return numbers;
   },
 
-  mergeSortPass: function (numbers, trace, start, stop) {
+  mergeSortPass: function (numbers, trace, tick, start, stop) {
     if (stop > start) {
       var mid = start + Math.floor(((stop - start) / 2));
-      this.mergeSortPass(numbers, trace, start, mid);
-      this.mergeSortPass(numbers, trace, mid + 1, stop);
-      this.mergeSortMerge(numbers, trace, start, mid, stop);
+      tick = this.mergeSortPass(numbers, trace, tick, start, mid);
+      tick = this.mergeSortPass(numbers, trace, tick, mid + 1, stop);
+      tick = this.mergeSortMerge(numbers, trace, tick, start, mid, stop);
     }
+    return tick;
   },
 
-  mergeSortMerge: function (numbers, trace, start, mid, stop) {
+  mergeSortMerge: function (numbers, trace, tick, start, mid, stop) {
     var left = start;
     var right = mid + 1;
-    mergeSortTick = mergeSortTick + 1;
+    tick = tick + 1;
     if (numbers[mid] <= numbers[right]) {
-      return;
+      return tick;
     }
     while (left <= mid && right <= stop) {
-      mergeSortTick = mergeSortTick + 1;
+      tick = tick + 1;
       if (numbers[left] < numbers[right]) {
         left++;
       } else {
         var tmp = numbers[right];
         for (var k = right; k > left; k--) {
-          this.move(numbers, numbers[k - 1], k, mergeSortTick, trace);
+          this.move(numbers, numbers[k - 1], k, tick, trace);
         }
-        this.move(numbers, tmp, left, mergeSortTick, trace);
+        this.move(numbers, tmp, left, tick, trace);
         left++;
         mid++;
         right++;
       }
     }
+    return tick;
   },
 
   drawGraph: function (canvas, graphName) {
