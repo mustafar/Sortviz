@@ -77,7 +77,7 @@ window.mrzv.sortviz = {
     var numbers = this.numbers.slice(0);
     var trace = this.initTrace(numbers);
     var tick = 0;
-    for (var i = numbers.length - 1; i > 1; i--) {
+    for (var i = numbers.length - 1; i > 0; i--) {
       for (j = 1; j <= i; j++) {
         tick = tick + 1;
         if (numbers[j - 1] > numbers[j]) {
