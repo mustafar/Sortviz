@@ -1,8 +1,8 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<title>Sortviz</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>Sortviz</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="keywords" content="sort, visualization, visualisation,
   merge sort, selection sort, insertion sort, bubble sort">
   
@@ -43,16 +43,16 @@
     var numbersTxt = numbersInput.value.split(',');
     var numbers = [];
     for (var i in numbersTxt) {
-			var numTxt = numbersTxt[i].trim();
-			var num = Number(numTxt);
-			if (numTxt.length === 0 || isNaN(num)) {
-				return [];
-			}
-			for (var j=0; j<numbers.length; j++) {
-				if (numbers[j] === num) {
-					return [];
-				}
-			}
+      var numTxt = numbersTxt[i].trim();
+      var num = Number(numTxt);
+      if (numTxt.length === 0 || isNaN(num)) {
+        return [];
+      }
+      for (var j=0; j<numbers.length; j++) {
+        if (numbers[j] === num) {
+          return [];
+        }
+      }
       numbers.push(num);
     }
     
