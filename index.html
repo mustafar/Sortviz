@@ -39,6 +39,27 @@
   var numbersInput = document.getElementById('numbers');
   var messageBox = document.getElementById('message');
   
+  function getRandomInt(min, max) {
+    return min + Math.floor(Math.random() * (max - min + 1));
+  }
+  
+  function getRandomInitNumbers(count) {
+    var numbers = [], i, tmp;
+    for (i = 0; i < count; i++) {
+      numbers.push(i);
+    }
+    var numShuffles = getRandomInt(
+      Math.floor(numbers.length / 2), numbers.length * 2);
+    for (i = 0; i < numShuffles; i++) {
+      var firstPosn = getRandomInt(0, numbers.length - 1);
+      var secondPosn = getRandomInt(0, numbers.length - 1);
+      tmp = numbers[firstPosn];
+      numbers[firstPosn] = numbers[secondPosn];
+      numbers[secondPosn] = tmp;
+    }
+    return numbers;
+  }
+  
   function getNumbers() {
     var numbersTxt = numbersInput.value.split(',');
     var numbers = [];
@@ -72,13 +93,15 @@
   }
   
   numbersInput.addEventListener('keypress', function (e) {
-      var key = e.which || e.keyCode;
-      if (key == 13) { // 13 is enter
-        visualize();
-      }
+    var key = e.which || e.keyCode;
+    if (key == 13) { // 13 is enter
+      visualize();
+    }
   });
 
   document.addEventListener("DOMContentLoaded", function() {
+    var randomNumbers = getRandomInitNumbers(10);
+    numbersInput.value = randomNumbers.join(', ');
     visualize();
   });
   
